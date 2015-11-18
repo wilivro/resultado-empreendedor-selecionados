@@ -4,8 +4,8 @@ var Service = (function($){
   return {
     getStudents: function(){
       return $.when(
-        $.getJSON('/resultado-empreendedor/estudantes.json'),
-        $.getJSON('/resultado-empreendedor/estudantes-wiquadro.json')
+        $.getJSON('../estudantes.json'),
+        $.getJSON('../estudantes-wiquadro.json')
       );
     }
   };
@@ -67,9 +67,11 @@ var Entrepreneur = (function($, Service) {
 
     $studentTable.find('tr')
       .filter(function(){
-        return $(this).text().toUpperCase().indexOf($studentFilterField.val().toUpperCase()) !== -1
-          && $(this).text().toUpperCase().indexOf($cityFilterField.val().toUpperCase()) !== -1
-          && $(this).text().toUpperCase().indexOf($statusFilterField.val().toUpperCase()) !== -1;
+        var trText = $(this).text().toUpperCase();
+
+        return trText.indexOf($studentFilterField.val().toUpperCase()) !== -1
+          && trText.indexOf($cityFilterField.val().toUpperCase()) !== -1
+          && trText.indexOf($statusFilterField.val().toUpperCase()) !== -1;
       }).show();
 
     showTotalStudents();
@@ -112,17 +114,18 @@ var StudentDetails = (function($, Service){
     return(false);
   }
 
-  function showStudentGrades() {
-    Service.getStudents().done(function(glStudents, wiquadroStudents){
-      wiquadroStudents = wiquadroStudents[0];
+  function showStudentInfo(student) {
+    $('.studentName').text(student.aluno);
+    $('.teacherName').text(student.professor);
+    $('.schoolName').text(student.escola);
+  }
 
-      if (wiquadroStudents.hasOwnProperty(getQueryVariable('id'))) {
-        var notas = wiquadroStudents[getQueryVariable('id')].notas;
-        var $notasTableBody = $notas.find('table tbody');
+  function showStudentGrades(grades) {
+    var $notasTableBody = $notas.find('table tbody');
 
-        $.each(notas, function(i, row){
-          $notasTableBody.append('<tr><td>' + row.disciplina + '</td><td>' + row.media + '</td></tr>');
-        });
+    $.each(grades, function(i, grade){
+      if (grade.media) {
+        $notasTableBody.append('<tr><td>' + grade.disciplina + '</td><td>' + grade.media + '</td></tr>');
       }
     });
   }
@@ -133,7 +136,17 @@ var StudentDetails = (function($, Service){
 
   return {
     init: function(){
-      showStudentGrades();
+      Service.getStudents().done(function(glStudents, wiquadroStudents){
+        wiquadroStudents = wiquadroStudents[0];
+
+        if (wiquadroStudents.hasOwnProperty(getQueryVariable('id'))) {
+          var student = wiquadroStudents[getQueryVariable('id')];
+
+          showStudentInfo(student);
+          showStudentGrades(student.notas);
+        }
+      });
+
       setIframeSrc();
     }
   };
