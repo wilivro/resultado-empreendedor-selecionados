@@ -53,7 +53,13 @@ var Entrepreneur = (function($, Service) {
           $tableBody.append(studentTableRowTemplate(student.chave, student.aluno, student.cidade, getStatusByCode(row.status)));
         }
       });
+
+      showTotalStudents();
     });
+  }
+
+  function showTotalStudents () {
+    $('.totalRows').html($studentTable.find('tbody tr:visible').length);
   }
 
   function filterTable() {
@@ -65,6 +71,8 @@ var Entrepreneur = (function($, Service) {
           && $(this).text().toUpperCase().indexOf($cityFilterField.val().toUpperCase()) !== -1
           && $(this).text().toUpperCase().indexOf($statusFilterField.val().toUpperCase()) !== -1;
       }).show();
+
+    showTotalStudents();
   }
 
   function onClickStudentTableRow() {
