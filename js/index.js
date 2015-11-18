@@ -4,8 +4,8 @@ var Service = (function($){
   return {
     getStudents: function(){
       return $.when(
-        $.getJSON('../estudantes.json'),
-        $.getJSON('../estudantes-wiquadro.json')
+        $.getJSON('/resultado-empreendedor/estudantes.json'),
+        $.getJSON('/resultado-empreendedor/estudantes-wiquadro.json')
       );
     }
   };
@@ -124,9 +124,7 @@ var StudentDetails = (function($, Service){
     var $notasTableBody = $notas.find('table tbody');
 
     $.each(grades, function(i, grade){
-      if (grade.media) {
-        $notasTableBody.append('<tr><td>' + grade.disciplina + '</td><td>' + grade.media + '</td></tr>');
-      }
+      $notasTableBody.append('<tr><td>' + grade.disciplina + '</td><td>' + grade.media + '</td></tr>');
     });
   }
 
