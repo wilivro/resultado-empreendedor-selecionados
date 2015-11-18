@@ -124,7 +124,9 @@ var StudentDetails = (function($, Service){
     var $notasTableBody = $notas.find('table tbody');
 
     $.each(grades, function(i, grade){
-      $notasTableBody.append('<tr><td>' + grade.disciplina + '</td><td>' + grade.media + '</td></tr>');
+      if (grade.media) {
+        $notasTableBody.append('<tr><td>' + grade.disciplina + '</td><td>' + grade.media + '</td></tr>');
+      }
     });
   }
 
