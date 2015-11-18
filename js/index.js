@@ -97,6 +97,7 @@ var StudentDetails = (function($, Service){
   'use strict';
 
   var $planoNegocioIframe = $('.plano-negocio');
+  var $perfilEmpreendedorIframe = $('.perfil-empreendedor');
   var $notas = $('.notas');
 
   function getQueryVariable(variable) {
@@ -131,7 +132,10 @@ var StudentDetails = (function($, Service){
   }
 
   function setIframeSrc() {
-    $planoNegocioIframe.attr('src', 'http://geralearning.wilivro.com.br/cursos/plano/ferramenta/desktop.asp?key=' + getQueryVariable('id'));
+    var studentId = getQueryVariable('id');
+
+    $planoNegocioIframe.attr('src', 'http://geralearning.wilivro.com.br/cursos/plano/ferramenta/desktop.asp?key=' + studentId);
+    $perfilEmpreendedorIframe.attr('src', 'http://meuperfilempreendedor.com.br/?auth=x37J4jul3DGK7P51s4HjM1Xhvso6kifagPFV672r&user=' + studentId + '#/view?_k=dbrwh5');
   }
 
   return {
