@@ -134,7 +134,13 @@ var StudentDetails = (function($, Service){
   function setIframeSrc() {
     var studentId = getQueryVariable('id');
 
-    $planoNegocioIframe.attr('src', 'http://geralearning.wilivro.com.br/_admin/planos/visuglobalwiquadro.asp?aluno=' + studentId);
+    $.ajaxSetup({
+      beforeSend: function(xhr){
+        xhr.overrideMimeType('text/html; charset=ISO-8859-1');
+      }
+    });
+
+    $planoNegocioIframe.load('http://geralearning.wilivro.com.br/_admin/planos/visuglobalwiquadro.asp?aluno=' + studentId);
     $perfilEmpreendedorIframe.attr('src', 'http://meuperfilempreendedor.com.br/?auth=x37J4jul3DGK7P51s4HjM1Xhvso6kifagPFV672r&user=' + studentId + '#/view?_k=dbrwh5');
   }
 
