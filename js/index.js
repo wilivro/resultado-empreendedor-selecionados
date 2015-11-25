@@ -34,7 +34,8 @@ var Entrepreneur = (function($, Service) {
       'Selecionado para Premiação',
       'Selecionado para Crédito',
       'Finalista por Município',
-      'Corrigido'
+      'Corrigido',
+      'Não Enviado'
     ];
 
     return statuses[code];
