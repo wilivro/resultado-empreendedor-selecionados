@@ -141,7 +141,7 @@ var StudentDetails = (function($, Service){
       }
     });
 
-    $planoNegocioIframe.load('http://geralearning.wilivro.com.br/_admin/planos/visuglobalwiquadro2.asp?aluno=' + studentId);
+    $planoNegocioIframe.load('http://geralearning.wilivro.com.br/_admin/planos/visuglobalwiquadrocredito.asp?aluno=' + studentId);
     $perfilEmpreendedorIframe.attr('src', 'http://meuperfilempreendedor.com.br/?auth=x37J4jul3DGK7P51s4HjM1Xhvso6kifagPFV672r&user=' + studentId + '#/view?_k=dbrwh5');
   }
 
