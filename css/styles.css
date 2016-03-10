@@ -1,4 +1,4 @@
 .main-header{height:80px; margin-bottom: 20px;}
 .student-table tbody tr:hover {cursor: pointer;}
 .notas{height: 200px;}
-.perfil-empreendedor{height: 750px;}
+.perfil-empreendedor{height: 750px; width: 100%;}
