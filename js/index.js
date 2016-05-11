@@ -51,7 +51,7 @@ var Entrepreneur = (function($, Service) {
       $.each(glStudents.planos, function(i, row) {
         if (wiquadroStudents.hasOwnProperty(row.key)) {
           var student = wiquadroStudents[row.key];
-          if (row.status === 2 || row.status === 3) {
+          if ((student.cidade.toUpperCase() != "TREINAMENTO") && (row.status === 2 || row.status === 3)) {
             $tableBody.append(studentTableRowTemplate(student.chave, student.aluno, student.cidade, getStatusByCode(row.status)));
           }
           }
