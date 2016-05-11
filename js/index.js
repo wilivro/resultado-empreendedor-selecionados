@@ -4,8 +4,8 @@ var Service = (function($){
   return {
     getStudents: function(){
       return $.when(
-        $.getJSON('/resultado-empreendedor/estudantes.json'),
-        $.getJSON('/resultado-empreendedor/estudantes-wiquadro.json')
+        $.getJSON('estudantes.json'),
+        $.getJSON('estudantes-wiquadro.json')
       );
     }
   };
@@ -51,8 +51,10 @@ var Entrepreneur = (function($, Service) {
       $.each(glStudents.planos, function(i, row) {
         if (wiquadroStudents.hasOwnProperty(row.key)) {
           var student = wiquadroStudents[row.key];
-          $tableBody.append(studentTableRowTemplate(student.chave, student.aluno, student.cidade, getStatusByCode(row.status)));
-        }
+          if (row.status === 2 || row.status === 3) {
+            $tableBody.append(studentTableRowTemplate(student.chave, student.aluno, student.cidade, getStatusByCode(row.status)));
+          }
+          }
       });
 
       showTotalStudents();
